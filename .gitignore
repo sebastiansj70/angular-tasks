@@ -1,0 +1,32 @@
+# Node modules
+node_modules/
+
+# Compiled output
+dist/
+out-tsc/
+
+# Angular specific
+.angular/
+
+# IDEs
+.idea/
+.vscode/
+.DS_Store
+
+# System files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Build files
+coverage/
+*.tgz
