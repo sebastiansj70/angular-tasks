@@ -1,0 +1,67 @@
+<div class="task-container">
+    <h2>Gestión de Tareas</h2>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let task">{{ task.id }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre de la Tarea</th>
+            <td mat-cell *matCellDef="let task">{{ task.title }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="assignedPerson">
+            <th mat-header-cell *matHeaderCellDef> Persona Asignada </th>
+            <td mat-cell *matCellDef="let task">
+                <ng-container *ngIf="task.assignees.length > 0; else noAssignees">
+                    {{ task.assignees[0].fullName }}
+                </ng-container>
+                <ng-template #noAssignees>
+                    <span>No hay personas asignadas</span>
+                </ng-template>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="skills">
+            <th mat-header-cell *matHeaderCellDef> Habilidades </th>
+            <td mat-cell *matCellDef="let task">
+                <ng-container *ngIf="task.assignees.length > 0; else noSkills">
+                    <ng-container *ngFor="let skill of task.assignees[0].skills; let last = last">
+                        {{ skill }}<span *ngIf="!last">, </span>
+                    </ng-container>
+                </ng-container>
+                <ng-template #noSkills>
+                    <span>No hay habilidades asignadas</span>
+                </ng-template>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dueDate">
+            <th mat-header-cell *matHeaderCellDef> Fecha Límite </th>
+            <td mat-cell *matCellDef="let task"> {{task.dueDate | date:'yyyy-MM-dd'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="completed">
+            <th mat-header-cell *matHeaderCellDef>Completada</th>
+            <td mat-cell *matCellDef="let task">{{ task.completed ? 'Sí' : 'No' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let task">
+                <button mat-icon-button class="icon-button"  (click)="toggleCompletion(task.id)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button class="icon-button" (click)="removeTask(task.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+</div>
