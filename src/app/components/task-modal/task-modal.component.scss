@@ -1,0 +1,15 @@
+.form-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+
+    label {
+        width: 200px; /* Ajusta este valor según sea necesario */
+        margin-right: 16px; /* Espacio entre el label y el input */
+        text-align: right; /* Alinea el texto a la derecha */
+    }
+
+    .flex-input {
+        flex-grow: 1; /* Permite que el input use el espacio disponible */
+    }
+}

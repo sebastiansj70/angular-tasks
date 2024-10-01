@@ -1,24 +1,62 @@
 <h2 mat-dialog-title>{{ isEditMode ? 'Editar Tarea' : 'Crear Tarea' }}</h2>
 <mat-dialog-content>
-  <form>
-    <mat-form-field appearance="fill">
-      <mat-label>Nombre de la Tarea</mat-label>
-      <input matInput [(ngModel)]="data.title" name="title" required />
-    </mat-form-field>
+    <form>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Descripción</mat-label>
-      <textarea matInput [(ngModel)]="data.description" name="description" required></textarea>
-    </mat-form-field>
+        <div class="form-field">
+            <label>Nombre de la tarea:</label>
+            <mat-form-field appearance="outline">
+                <mat-label>Enter task name</mat-label>
+                <input matInput [(ngModel)]="data.title" name="title" required>
+            </mat-form-field>
+        </div>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Fecha Límite</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="data.dueDate" name="dueDate" required />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
+        <div class="form-field">
+            <label>Fecha Límite:</label>
+            <mat-form-field appearance="outline">
+                <mat-label>Due Date</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="data.dueDate" name="dueDate" required />
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
 
-    <button mat-button (click)="onNoClick()">Cancelar</button>
-    <button mat-button (click)="updateTask()">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
-  </form>
+        <div class="form-field">
+            <label>description:</label>
+            <mat-form-field appearance="fill">
+                <textarea matInput [(ngModel)]="data.description" name="description" required></textarea>
+            </mat-form-field>
+        </div>
+
+        <h3>Personas Asociadas:</h3>
+
+        <div *ngFor="let person of data.assignees; let i = index">
+            <div class="form-field">
+                <label>Nombre Completo:</label>
+                <mat-form-field appearance="outline">
+                    <mat-label>Full Name</mat-label>
+                    <input matInput [(ngModel)]="person.fullName" name="fullName-{{i}}" required
+                        [ngModelOptions]="{standalone: true}" />
+                    <mat-icon matSuffix>person</mat-icon>
+                </mat-form-field>
+            </div>
+
+            <div class="form-field">
+                <label>Edad:</label>
+                <mat-form-field appearance="outline">
+                    <mat-label>Edad</mat-label>
+                    <input matInput type="number" [(ngModel)]="person.age" name="age-{{i}}" required
+                        [ngModelOptions]="{standalone: true}" min="18" />
+                </mat-form-field>
+            </div>
+
+            <h3>Habilidades:</h3>
+            <app-skill-chips [skills]="person.skills" (skillsChange)="updateSkills($event)"></app-skill-chips>
+
+
+            <button mat-button (click)="removePerson(i)">Eliminar Persona</button>
+        </div>
+
+        <button mat-button (click)="onNoClick()">Cancelar</button>
+        <button mat-button (click)="updateTask()">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
+    </form>
 </mat-dialog-content>

@@ -27,17 +27,13 @@ export class TaskComponent implements OnInit {
     }
 
     loadTasks(): void {
-        this.taskService.getTasks().subscribe(data => {
-            this.dataSource.data = data.tasks;
+        this.taskService.getTasks().subscribe(tasks => {
+            this.dataSource.data = tasks;
             this.dataSource.paginator = this.paginator;
         });
     }
 
     toggleCompletion(taskId: number): void {
-        console.log("==================");
-        console.log(taskId);
-        console.log("==================");
-        
         this.taskService.toggleTaskCompletion(taskId).subscribe(() => {
             this.loadTasks();
         });
@@ -58,7 +54,7 @@ export class TaskComponent implements OnInit {
 
     removeTask(taskId: number): void {
         this.taskService.removeTask(taskId).subscribe(() => {
-            this.loadTasks(); // Recargar tareas después de eliminar
+            this.loadTasks();
         });
     }
 
@@ -78,7 +74,7 @@ export class TaskComponent implements OnInit {
     openCreateTaskModal(): void {
         const dialogRef = this.dialog.open(TaskModalComponent, {
             width: '400px',
-            data: { title: '', description: '', dueDate: null, completed: false } // Datos para crear tarea
+            data: { title: '', description: '', dueDate: null, completed: false }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -89,14 +85,14 @@ export class TaskComponent implements OnInit {
     }
 
     createTask(newTask: Task): void {
-        this.taskService.createTask(newTask).subscribe(() => {
-            this.loadTasks(); // Recargar tareas después de crear
+        this.taskService.addTask(newTask).subscribe(() => {
+            this.loadTasks();
         });
     }
 
     updateTask(updatedTask: Task): void {
         this.taskService.updateTask(updatedTask).subscribe(() => {
-            this.loadTasks(); // Recargar tareas después de actualizar
+            this.loadTasks();
         });
     }
 }

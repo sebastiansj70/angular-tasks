@@ -21,6 +21,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SkillChipsComponent } from './components/skill-chips/skill-chips.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
     declarations: [
@@ -29,7 +32,8 @@ import { MatNativeDateModule } from '@angular/material/core';
         NavbarComponent,
         FooterComponent,
         TaskModalComponent,
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        SkillChipsComponent
     ],
     imports: [
         BrowserModule,
@@ -47,6 +51,8 @@ import { MatNativeDateModule } from '@angular/material/core';
         MatDatepickerModule,
         FormsModule,
         MatNativeDateModule,
+        MatChipsModule,
+        MatFormFieldModule
     ],
     providers: [TaskService],
     bootstrap: [AppComponent]
