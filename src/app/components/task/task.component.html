@@ -50,10 +50,10 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Acciones</th>
             <td mat-cell *matCellDef="let task">
-                <button mat-icon-button class="icon-button"  (click)="toggleCompletion(task.id)">
+                <button mat-icon-button class="icon-button"  (click)="openEditTaskModal(task)">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button class="icon-button" (click)="removeTask(task.id)">
+                <button mat-icon-button class="icon-button" (click)="confirmDeleteTask(task)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>

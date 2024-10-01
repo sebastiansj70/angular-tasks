@@ -9,6 +9,7 @@ import { Person } from '../models/person.model';
 })
 export class TaskService {
     private dataUrl = 'assets/data.json';
+    private apiUrl = 'http://api-url';
 
     constructor(private http: HttpClient) { }
 
@@ -63,6 +64,10 @@ export class TaskService {
         return new Observable(observer => {
             this.getTasks().subscribe(data => {
                 const task = data.tasks.find(t => t.id === taskId);
+                console.log("===========");
+                console.log(task);
+                console.log("===========");
+                
                 if (task) {
                     task.completed = !task.completed;
                     observer.next();
@@ -72,5 +77,17 @@ export class TaskService {
                 observer.complete();
             });
         });
+    }
+
+    createTask(task: Task): Observable<Task> {
+        return this.http.post<Task>(`${this.apiUrl}/tasks`, task);
+    }
+
+    updateTask(task: Task): Observable<Task> {
+        return this.http.put<Task>(`${this.apiUrl}/tasks/${task.id}`, task);
+    }
+
+    removeTask(taskId: number): Observable<Task> {
+        return this.http.delete<Task>(`${this.apiUrl}/tasks/${taskId}`);
     }
 }
