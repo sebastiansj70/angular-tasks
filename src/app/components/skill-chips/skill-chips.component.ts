@@ -10,10 +10,14 @@ export class SkillChipsComponent {
     @Output() skillsChange = new EventEmitter<string[]>();
 
     addSkill(event: any): void {
+        const input = event.input;
         const skill = event.value.trim();
         if (skill) {
             this.skills.push(skill);
             this.skillsChange.emit(this.skills);
+        }
+        if (input) {
+            input.value = '';
         }
     }
 

@@ -44,4 +44,14 @@ export class TaskModalComponent {
     updateSkills(newSkills: string[]) {
         this.skills = newSkills;
     }
+
+    addPerson() {
+        const newPerson: Person = {
+            id: 1,
+            fullName: '',
+            age: 1,
+            skills: []
+        };
+        this.data.assignees.push(newPerson);
+    }
 }

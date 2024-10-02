@@ -1,5 +1,11 @@
 <div class="task-container">
-    <h2>Gestión de Tareas</h2>
+    <div class="task-header">
+        <h2>Gestión de Tareas</h2>
+        <button mat-raised-button color="primary" (click)="openCreateTaskModal()">
+            <mat-icon>add</mat-icon>
+            Agregar Tarea
+        </button>
+    </div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>ID</th>
@@ -50,7 +56,7 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Acciones</th>
             <td mat-cell *matCellDef="let task">
-                <button mat-icon-button class="icon-button"  (click)="openEditTaskModal(task)">
+                <button mat-icon-button class="icon-button" (click)="openEditTaskModal(task)">
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button mat-icon-button class="icon-button" (click)="confirmDeleteTask(task)">

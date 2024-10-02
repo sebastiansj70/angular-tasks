@@ -1,15 +1,129 @@
+.modal-content {
+    width: auto;
+    max-width: 90%;
+    min-width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+}
+
+mat-dialog-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    margin-top: 16px;
+}
+
+
+
 .form-field {
     display: flex;
     align-items: center;
     margin-bottom: 16px;
+    width: 100%;
 
     label {
-        width: 200px; /* Ajusta este valor según sea necesario */
-        margin-right: 16px; /* Espacio entre el label y el input */
-        text-align: right; /* Alinea el texto a la derecha */
+        width: 200px;
+        margin-right: 16px;
+        text-align: right;
+    }
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+h2 {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+h3 {
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+.person-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.cancel-button,
+.update-button,
+.remove-button {
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+.cancel-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.update-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.remove-button {
+    background-color: #FF5722;
+    color: white;
+    margin-top: 10px;
+}
+
+.mat-mdc-text-field-wrapper {
+    background-color: #FFF !important;
+}
+
+.add-person {
+    border: 2px dotted #ccc; 
+    border-radius: 8px; 
+    padding: 10px; 
+    text-align: center;
+    cursor: pointer; 
+    margin-top: 20px; 
+
+    label {
+        color: #ccc; 
     }
 
-    .flex-input {
-        flex-grow: 1; /* Permite que el input use el espacio disponible */
+    &:hover {
+        background-color: #f0f8ff; 
     }
 }

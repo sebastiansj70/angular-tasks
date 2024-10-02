@@ -37,3 +37,10 @@ table {
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}

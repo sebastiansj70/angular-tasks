@@ -1,7 +1,6 @@
 <h2 mat-dialog-title>{{ isEditMode ? 'Editar Tarea' : 'Crear Tarea' }}</h2>
-<mat-dialog-content>
+<mat-dialog-content class="modal-content">
     <form>
-
         <div class="form-field">
             <label>Nombre de la tarea:</label>
             <mat-form-field appearance="outline">
@@ -13,7 +12,7 @@
         <div class="form-field">
             <label>Fecha Límite:</label>
             <mat-form-field appearance="outline">
-                <mat-label>Due Date</mat-label>
+                <mat-label>Fecha Límite</mat-label>
                 <input matInput [matDatepicker]="picker" [(ngModel)]="data.dueDate" name="dueDate" required />
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -21,7 +20,7 @@
         </div>
 
         <div class="form-field">
-            <label>description:</label>
+            <label>Descripción:</label>
             <mat-form-field appearance="fill">
                 <textarea matInput [(ngModel)]="data.description" name="description" required></textarea>
             </mat-form-field>
@@ -29,7 +28,7 @@
 
         <h3>Personas Asociadas:</h3>
 
-        <div *ngFor="let person of data.assignees; let i = index">
+        <div *ngFor="let person of data.assignees; let i = index" class="person-container">
             <div class="form-field">
                 <label>Nombre Completo:</label>
                 <mat-form-field appearance="outline">
@@ -50,13 +49,19 @@
             </div>
 
             <h3>Habilidades:</h3>
-            <app-skill-chips [skills]="person.skills" (skillsChange)="updateSkills($event)"></app-skill-chips>
-
-
-            <button mat-button (click)="removePerson(i)">Eliminar Persona</button>
+            <div class="skills-container">
+                <app-skill-chips [skills]="person.skills" (skillsChange)="updateSkills($event)"></app-skill-chips>
+            </div>
+            <mat-icon class="remove-icon" (click)="removePerson(i)" aria-label="Eliminar Persona" style="cursor:pointer;">delete</mat-icon>
         </div>
 
-        <button mat-button (click)="onNoClick()">Cancelar</button>
-        <button mat-button (click)="updateTask()">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
+        <div class="add-person" (click)="addPerson()">
+            <label>Agregar Persona</label>
+        </div>
+
+        <div class="button-container">
+            <button mat-button (click)="onNoClick()" class="cancel-button">Cancelar</button>
+            <button mat-button (click)="updateTask()" class="update-button">{{ isEditMode ? 'Actualizar' : 'Crear' }}</button>
+        </div>
     </form>
 </mat-dialog-content>

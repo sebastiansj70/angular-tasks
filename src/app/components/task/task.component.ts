@@ -60,7 +60,6 @@ export class TaskComponent implements OnInit {
 
     openEditTaskModal(task: Task): void {
         const dialogRef = this.dialog.open(TaskModalComponent, {
-            width: '400px',
             data: { ...task }
         });
 
@@ -73,13 +72,13 @@ export class TaskComponent implements OnInit {
 
     openCreateTaskModal(): void {
         const dialogRef = this.dialog.open(TaskModalComponent, {
-            width: '400px',
-            data: { title: '', description: '', dueDate: null, completed: false }
+            data: { title: '', description: '', completed: false, dueDate: null, assignees: [] }
         });
 
         dialogRef.afterClosed().subscribe(result => {
             if (result) {
-                this.createTask(result);
+                const formattedTask = this.formatTask(result);
+                this.createTask(formattedTask);
             }
         });
     }
@@ -94,5 +93,18 @@ export class TaskComponent implements OnInit {
         this.taskService.updateTask(updatedTask).subscribe(() => {
             this.loadTasks();
         });
+    }
+
+    formatTask(task: Task): Task {
+        return {
+            ...task,
+            assignees: task.assignees || [],
+            dueDate: task.dueDate ? this.formatDate(task.dueDate) : ''
+        };
+    }
+
+    formatDate(date: string | Date): string {
+        const newDate = new Date(date);
+        return newDate.toISOString().split('T')[0];
     }
 }
